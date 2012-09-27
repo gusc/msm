@@ -328,8 +328,9 @@ class MSMViewHtml extends MSMView {
 		$data_type = isset($_POST['data']) ? $_POST['data'] : 'all';
 		$drop = isset($_POST['drop']) && intval($_POST['drop']) > 0;
 		echo '
+					<h1>'.$this->model->getDatabase().'</h1>
 					<form method="post" action="" id="psm-export">
-						<h1>Export</h1>';
+						<h2>Export</h2>';
 		echo UIForms::hidden('do_export', 1);
 		if ($this->model->hasErrors()){
 			if (isset($_POST['do_export'])){
@@ -349,7 +350,7 @@ class MSMViewHtml extends MSMView {
 		//$transaction = isset($_POST['transaction']) && intval($_POST['transaction']) > 0;
 		echo '
 					<form method="post" action="" id="psm-import" enctype="multipart/form-data">
-						<h1>Import</h1>';
+						<h2>Import</h2>';
 		echo UIForms::hidden('do_import', 1);
 		if ($this->model->hasErrors()){
 			if (isset($_POST['do_import'])){
@@ -376,7 +377,7 @@ class MSMViewHtml extends MSMView {
 		}
 		echo '
 					<form method="post" action="" id="psm-query">
-						<h1>Execute SQL query</h1>';
+						<h1>'.$this->model->getDatabase().' &gt; Execute SQL query</h1>';
 		echo UIForms::hidden('do_sql', 1);
 		if ($this->model->hasErrors()){
 			echo UIForms::error($this->model->getErrors());
@@ -446,7 +447,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function serverInfo(){
 		echo '
-					<h1>Info</h1>
+					<h1>'.$this->model->getDatabase().' &gt; Info</h1>
 					<table>
 						<thead>
 							<tr>
@@ -485,7 +486,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function triggerList(){
 		echo '
-					<h1>Triggers</h1>
+					<h1>'.$this->model->getDatabase().' &gt; Triggers</h1>
 					<table>
 						<thead>
 							<tr>
@@ -519,7 +520,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function functionList(){
 		echo '
-					<h1>Functions</h1>
+					<h1>'.$this->model->getDatabase().' &gt; Functions</h1>
 					<table>
 						<thead>
 							<tr>
@@ -551,7 +552,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function viewInfo($view){
 		echo '
-					<h1><a href="../../">Structure</a> &gt; '.$view.'</h1>
+					<h1>'.$this->model->getDatabase().' &gt; <a href="../../">Structure</a> &gt; '.$view.'</h1>
 					<table>
 						<thead>
 							<tr>
@@ -588,7 +589,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function tableInfo($table){
 		echo '
-					<h1><a href="../../">Structure</a> &gt; '.$table.'</h1>
+					<h1>'.$this->model->getDatabase().' &gt; <a href="../../">Structure</a> &gt; '.$table.'</h1>
 					<table>
 						<thead>
 							<tr>
@@ -665,7 +666,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function tableData($table){
 		echo '
-					<h1><a href="../../../">Structure</a> &gt; <a href="../">'.$table.'</a> &gt; Data</h1>';
+					<h1>'.$this->model->getDatabase().' &gt; <a href="../../../">Structure</a> &gt; <a href="../">'.$table.'</a> &gt; Data</h1>';
 		$data_count = $this->model->getDataCount($table);
 		if (($r = $this->model->getData($table, (isset($_GET['page']) ? $_GET['page'] * $this->rows_per_page : 0), $this->rows_per_page)) !== false){
 			echo '
@@ -711,7 +712,7 @@ class MSMViewHtml extends MSMView {
 	}
 	private function objectList($type = null){
 		echo '
-					<h1>Structure</h1>
+					<h1>'.$this->model->getDatabase().' &gt; Structure</h1>
 					<table>
 						<thead>
 							<tr>
@@ -736,37 +737,6 @@ class MSMViewHtml extends MSMView {
 							</tr>';
 				}
 			}
-		}
-		echo '
-						</tbody>
-					</table>';
-	}
-	private function schemaList($title){
-		echo '
-					<h1>'.$title.'</h1>
-					<table>
-						<thead>
-							<tr>
-								<th>Type</th>
-								<th>Name</th>
-								<th>Owner</th>
-								<th>Comments</th>
-							</tr>
-						</thead>
-						<tbody>';
-		if (($r = $this->model->getSchemas()) !== false){
-			$c = $this->model->count($r);
-			for ($i = 0; $i < $c; $i ++){
-				$schema = $this->model->fetch($r, $i);
-				echo '
-							<tr>
-								<td class="type schema">schema</td>
-								<td><a href="schema/'.$schema['name'].'/">'.htmlspecialchars($schema['name']).'</a></td>
-								<td>'.htmlspecialchars($schema['owner']).'</td>
-								<td>'.htmlspecialchars($schema['comment']).'</td>
-							</tr>';
-			}
-			$this->model->free($r);
 		}
 		echo '
 						</tbody>

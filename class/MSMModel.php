@@ -388,6 +388,13 @@ class MSMModel {
 		$this->dbname = $dbname;
 	}
 	/**
+	* Get database name
+	* @return string
+	*/
+	public function getDatabase(){
+		return $this->dbname;
+	}
+	/**
 	* Set user credentials
 	* @param string $user
 	* @param string $pass
@@ -395,6 +402,13 @@ class MSMModel {
 	public function setUser($user, $pass=''){
 		$this->user = $user;
 		$this->pass = $pass;
+	}
+	/**
+	* Get username
+	* @return string
+	*/
+	public function getUsername(){
+		return $this->user;
 	}
 	
 	/**
