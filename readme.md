@@ -15,3 +15,28 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEAL
 
 */
 
+General Info
+============
+
+* License: MIT
+* Uses FamFamFam icon set from: http://www.famfamfam.com/lab/icons/silk/
+
+Dependencies
+============
+
+* php-5.3+ with mysql extension
+* mysql-5.1+
+
+Installation
+============
+
+1. Copy files in your web root or sub directory
+2. Edit config.inc.php file accordingly (it's mandatory to set MSM_URL constant)
+3. Enable mod_rewrite and .htaccess file support in your HTTP server
+4. Enable exec() function and grant access to pg_dump and psql commands
+
+Use in your project
+===================
+
+Basically you can use MSMViewHtml and MSMModel classes, just set up the constants (MSM_URL, MSM_PATH) and copy the logic from index.php and MSM.php files. And when calling a view function from MSMHtmlView first parameter should be false, so it does not output full HTML source.
+
