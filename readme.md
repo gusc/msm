@@ -33,7 +33,7 @@ Installation
 1. Copy files in your web root or sub directory
 2. Edit config.inc.php file accordingly (it's mandatory to set MSM_URL constant)
 3. Enable mod_rewrite and .htaccess file support in your HTTP server
-4. Enable exec() function and grant access to pg_dump and psql commands
+4. Enable exec() function and grant access to mysql_dump and mysql commands
 
 Use in your project
 ===================
